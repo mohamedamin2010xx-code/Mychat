@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /root-x7k9-panel
+Disallow: /root-x7k9-control
+Disallow: /monitor
+Disallow: /console
+Disallow: /api/
+Disallow: /uploads/
+Disallow: /chat
+
+Allow: /
+Allow: /style.css
+Allow: /matrix.js

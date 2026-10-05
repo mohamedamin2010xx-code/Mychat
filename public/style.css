@@ -1,0 +1,826 @@
+/* ============================================
+   WORMGPT v4.0 - Final Cyberpunk Theme
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Fira Code', 'Share Tech Mono', 'Courier New', monospace;
+}
+
+:root {
+  --black: #000000;
+  --black-2: #050505;
+  --panel: #0a0a0a;
+  --panel-2: #0f0f0f;
+  --hover: #151515;
+
+  --neon: #00ff41;
+  --neon-2: #39ff14;
+  --neon-dim: #00cc33;
+  --neon-dark: #0a2a0a;
+  --glow: rgba(0, 255, 65, 0.5);
+  --glow-soft: rgba(0, 255, 65, 0.15);
+
+  --red: #ff003c;
+  --red-glow: rgba(255, 0, 60, 0.5);
+  --cyan: #00ffff;
+
+  --text: #e8ffe8;
+  --text-dim: #8ac08a;
+  --text-mute: #5a8a5a;
+
+  --border: #1a3a1a;
+  --border-bright: #00ff41;
+}
+
+body {
+  background: var(--black);
+  color: var(--text);
+  height: 100dvh;
+  overflow: hidden;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* ====== خلفية Matrix ====== */
+#matrix-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* في صفحة الدردشة: مخفية تماماً */
+.chat-body #matrix-bg {
+  opacity: 0;
+}
+
+/* ====== Scanlines خفيفة ====== */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 65, 0.03) 0px,
+    rgba(0, 255, 65, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.5;
+}
+
+/* ====== Vignette لصفحة الدخول فقط ====== */
+.auth-body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ====== شريط التمرير ====== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon), var(--neon-dim));
+  box-shadow: 0 0 8px var(--glow);
+}
+
+/* ============================================
+   صفحة تسجيل الدخول
+   ============================================ */
+.auth-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--black);
+}
+
+.auth-card {
+  background: rgba(10, 10, 10, 0.95);
+  padding: 50px 40px;
+  width: 100%;
+  max-width: 440px;
+  border: 1px solid var(--border-bright);
+  box-shadow:
+    0 0 30px var(--glow),
+    0 0 60px var(--glow-soft),
+    inset 0 0 30px rgba(0, 255, 65, 0.03);
+  position: relative;
+  z-index: 2;
+  animation: bootUp 0.8s ease;
+  backdrop-filter: blur(4px);
+}
+
+.auth-card::before {
+  content: '┌─[ SYSTEM ACCESS ]';
+  position: absolute;
+  top: -9px;
+  right: 20px;
+  background: var(--black);
+  color: var(--neon);
+  font-size: 11px;
+  padding: 0 10px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 6px var(--glow);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.auth-card::after {
+  content: '└─────────────────';
+  position: absolute;
+  bottom: -9px;
+  right: 20px;
+  background: var(--black);
+  color: var(--neon);
+  font-size: 11px;
+  padding: 0 10px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 6px var(--glow);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+@keyframes bootUp {
+  0%   { opacity: 0; transform: scaleY(0.001); filter: blur(8px); }
+  40%  { opacity: 1; transform: scaleY(0.001); filter: blur(4px); }
+  60%  { opacity: 1; transform: scaleY(1.05); filter: blur(0); }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+
+.auth-card h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--neon);
+  text-shadow:
+    0 0 10px var(--glow),
+    0 0 25px var(--glow),
+    0 0 40px var(--glow-soft);
+  letter-spacing: 5px;
+  font-family: 'Share Tech Mono', monospace;
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0%, 90%, 100% { transform: translate(0, 0); }
+  92% { transform: translate(-2px, 1px); text-shadow: -2px 0 var(--red), 2px 0 var(--cyan), 0 0 10px var(--glow); }
+  94% { transform: translate(2px, -1px); text-shadow: 2px 0 var(--red), -2px 0 var(--cyan), 0 0 10px var(--glow); }
+  96% { transform: translate(-1px, 0); text-shadow: 1px 0 var(--red), -1px 0 var(--cyan), 0 0 10px var(--glow); }
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  margin-bottom: 32px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.subtitle::before { content: '> '; color: var(--neon); }
+
+.auth-card input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--border);
+  color: var(--neon);
+  font-size: 14px;
+  font-family: inherit;
+  transition: 0.2s;
+  caret-color: var(--neon);
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: var(--neon);
+  box-shadow:
+    0 0 15px var(--glow),
+    inset 0 0 15px var(--glow-soft);
+  background: rgba(0, 20, 0, 0.6);
+}
+
+.auth-card input::placeholder {
+  color: var(--text-mute);
+  letter-spacing: 1px;
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--neon);
+  background: transparent;
+  color: var(--neon);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: 0.2s;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px var(--glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card button::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--glow), transparent);
+  transition: 0.6s;
+}
+
+.auth-card button:hover::after { left: 100%; }
+
+.auth-card button:hover {
+  background: var(--glow-soft);
+  box-shadow:
+    0 0 25px var(--glow),
+    inset 0 0 20px var(--glow-soft);
+  color: #fff;
+}
+
+.auth-card button.secondary {
+  border-color: var(--text-mute);
+  color: var(--text-dim);
+  text-shadow: none;
+}
+.auth-card button.secondary:hover {
+  border-color: var(--neon-dim);
+  color: var(--neon-dim);
+  box-shadow: 0 0 15px var(--glow-soft);
+}
+
+.msg {
+  text-align: center;
+  color: var(--red);
+  margin-top: 16px;
+  font-size: 13px;
+  text-shadow: 0 0 8px var(--red-glow);
+  letter-spacing: 1px;
+}
+
+/* ============================================
+   واجهة المحادثة
+   ============================================ */
+.chat-body {
+  background: var(--black);
+}
+
+.app {
+  display: flex;
+  height: 100dvh;
+  position: relative;
+  z-index: 2;
+}
+
+/* ====== الشريط الجانبي ====== */
+.sidebar {
+  width: 280px;
+  background: #050505;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon), var(--neon-2), var(--neon), transparent);
+  box-shadow: 0 0 12px var(--glow);
+}
+
+.sidebar-header {
+  padding: 16px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-header #me {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  flex: 1;
+  color: var(--neon);
+  text-shadow: 0 0 8px var(--glow);
+  letter-spacing: 1px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.sidebar-header #me::before {
+  content: '$';
+  color: var(--neon);
+  font-size: 16px;
+  text-shadow: 0 0 8px var(--glow);
+}
+
+.sidebar-header .icon-btn {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--red);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.15s;
+  font-family: inherit;
+}
+
+.sidebar-header .icon-btn:hover {
+  border-color: var(--red);
+  box-shadow: 0 0 15px var(--red-glow);
+  background: rgba(255, 0, 60, 0.1);
+}
+
+.section { padding: 12px 10px; }
+
+.section-title {
+  font-size: 10px;
+  color: var(--neon-dim);
+  padding: 14px 12px 8px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.section-title::before { content: '// '; color: var(--neon); }
+
+.room-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  margin-bottom: 3px;
+  font-size: 13px;
+  transition: 0.2s;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-right: 2px solid transparent;
+  font-family: 'Fira Code', monospace;
+}
+
+.room-item:hover {
+  background: var(--hover);
+  color: var(--neon);
+  border-right-color: var(--neon-dim);
+  padding-right: 18px;
+}
+
+.room-item.active {
+  background: linear-gradient(90deg, transparent, var(--neon-dark));
+  color: var(--neon);
+  border-right-color: var(--neon);
+  box-shadow: inset 0 0 20px var(--glow-soft);
+  text-shadow: 0 0 6px var(--glow);
+}
+
+.new-chat {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: transparent;
+  border: 1px dashed var(--neon-dim);
+  color: var(--neon-dim);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Share Tech Mono', monospace;
+  transition: 0.2s;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.new-chat:hover {
+  background: var(--glow-soft);
+  color: var(--neon);
+  border-style: solid;
+  box-shadow: 0 0 20px var(--glow-soft);
+}
+
+.users-list {
+  margin-top: 8px;
+  background: #000;
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+}
+
+.hidden { display: none; }
+
+.user-item {
+  padding: 11px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  transition: 0.15s;
+  color: var(--text);
+  font-family: 'Fira Code', monospace;
+}
+.user-item:last-child { border-bottom: none; }
+.user-item::before { content: '> '; color: var(--neon-dim); }
+.user-item:hover {
+  background: var(--hover);
+  color: var(--neon);
+  text-shadow: 0 0 6px var(--glow);
+  padding-right: 20px;
+}
+
+/* ====== المنطقة الرئيسية ====== */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  min-width: 0;
+  position: relative;
+}
+
+.chat-header {
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 14px;
+  background: #050505;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--neon);
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px var(--glow);
+  font-family: 'Share Tech Mono', monospace;
+  position: relative;
+}
+
+.menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border-bright);
+  color: var(--neon);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  font-family: inherit;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px var(--glow-soft);
+}
+
+.menu-btn:hover {
+  background: var(--glow-soft);
+  box-shadow: 0 0 20px var(--glow);
+}
+
+.chat-header::before {
+  content: '❯';
+  color: var(--neon);
+  font-size: 18px;
+  text-shadow: 0 0 8px var(--glow);
+}
+
+/* ====== الرسائل ====== */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  background: #000;
+}
+
+.msg-row {
+  display: flex;
+  gap: 14px;
+  padding: 14px 32px;
+  max-width: 950px;
+  width: 100%;
+  margin: 0 auto;
+  animation: msgIn 0.35s ease;
+}
+
+@keyframes msgIn {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-family: 'Share Tech Mono', monospace;
+  border: 1px solid;
+}
+
+.msg-row.mine .avatar {
+  background: var(--neon-dark);
+  color: var(--neon);
+  border-color: var(--neon);
+  box-shadow: 0 0 15px var(--glow);
+  text-shadow: 0 0 6px var(--neon);
+}
+
+.msg-row.other .avatar {
+  background: #1a0000;
+  color: var(--red);
+  border-color: var(--red);
+  box-shadow: 0 0 15px var(--red-glow);
+  text-shadow: 0 0 6px var(--red);
+}
+
+.bubble {
+  background: transparent;
+  padding: 4px 0;
+  line-height: 1.7;
+  word-wrap: break-word;
+  color: var(--text);
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+}
+
+.bubble .sender {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--neon-dim);
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.bubble .sender::before { content: '[@'; }
+.bubble .sender::after  { content: '] >'; }
+
+.msg-row.mine .bubble {
+  background: linear-gradient(135deg, var(--neon-dark) 0%, rgba(10, 42, 10, 0.5) 100%);
+  padding: 12px 18px;
+  border-right: 3px solid var(--neon);
+  color: #d4ffd4;
+  max-width: 78%;
+  flex: 0 1 auto;
+  box-shadow: 0 0 15px var(--glow-soft);
+}
+
+.msg-row.other .bubble {
+  background: linear-gradient(135deg, var(--panel) 0%, rgba(20, 5, 5, 0.5) 100%);
+  padding: 12px 18px;
+  border-left: 3px solid var(--red);
+  max-width: 78%;
+  flex: 0 1 auto;
+  box-shadow: 0 0 15px rgba(255, 0, 60, 0.15);
+}
+
+.bubble img {
+  max-width: 100%;
+  display: block;
+  margin-top: 10px;
+  border: 1px solid var(--neon);
+  box-shadow: 0 0 15px var(--glow-soft);
+  cursor: pointer;
+}
+
+.bubble .time {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 8px;
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.msg-row.mine { justify-content: flex-start; flex-direction: row-reverse; }
+.msg-row.other { justify-content: flex-end; flex-direction: row; }
+
+.msg-row.mine .bubble .time { text-align: right; }
+.msg-row.other .bubble .time { text-align: left; }
+
+/* ====== صندوق الإدخال ====== */
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 16px 28px 22px;
+  padding-bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+  background: #050505;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.composer textarea {
+  flex: 1;
+  background: #000;
+  border: 1px solid var(--border);
+  padding: 14px 18px;
+  color: var(--neon);
+  resize: none;
+  font-size: 14px;
+  min-height: 52px;
+  max-height: 180px;
+  font-family: inherit;
+  line-height: 1.5;
+  transition: 0.2s;
+  caret-color: var(--neon);
+}
+
+.composer textarea::placeholder {
+  color: var(--text-mute);
+  letter-spacing: 2px;
+}
+
+.composer textarea:focus {
+  outline: none;
+  border-color: var(--neon);
+  box-shadow: 0 0 20px var(--glow), inset 0 0 20px var(--glow-soft);
+  background: rgba(0, 15, 0, 0.9);
+}
+
+.icon-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--neon-dim);
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+
+.icon-btn:hover {
+  border-color: var(--neon);
+  color: var(--neon);
+  box-shadow: 0 0 20px var(--glow);
+}
+
+.send-btn {
+  background: transparent;
+  border: 1px solid var(--neon);
+  color: var(--neon);
+  width: 52px;
+  height: 52px;
+  cursor: pointer;
+  font-size: 22px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-shadow: 0 0 8px var(--glow);
+  box-shadow: 0 0 15px var(--glow-soft);
+}
+
+.send-btn:hover {
+  background: var(--glow-soft);
+  box-shadow: 0 0 30px var(--glow);
+  transform: translateY(-2px);
+}
+
+/* ====== الحالة الفارغة ====== */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  gap: 22px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.empty-state .logo {
+  width: 100px;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid var(--neon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
+  box-shadow:
+    0 0 30px var(--glow),
+    0 0 60px var(--glow-soft),
+    inset 0 0 30px var(--glow-soft);
+  animation: pulseLogo 2.5s ease-in-out infinite;
+}
+
+@keyframes pulseLogo {
+  0%, 100% {
+    box-shadow: 0 0 30px var(--glow), 0 0 60px var(--glow-soft);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 50px var(--neon), 0 0 100px var(--glow);
+    transform: scale(1.03);
+  }
+}
+
+.empty-state .title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--glow), 0 0 25px var(--glow);
+  letter-spacing: 6px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.empty-state .subtitle {
+  font-size: 13px;
+  color: var(--text-dim);
+  max-width: 440px;
+  line-height: 1.8;
+  letter-spacing: 1px;
+  font-family: 'Fira Code', monospace;
+}
+
+/* ============================================
+   للهواتف
+   ============================================ */
+@media (max-width: 700px) {
+  .sidebar {
+    position: fixed;
+    right: -280px;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 280px;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -8px 0 40px rgba(0, 255, 65, 0.3);
+  }
+  .sidebar.open { right: 0; }
+
+  .menu-btn {
+    display: flex;
+  }
+
+  .msg-row { padding: 12px 14px; gap: 10px; }
+  .msg-row.mine .bubble,
+  .msg-row.other .bubble { max-width: 85%; padding: 10px 14px; font-size: 13px; }
+
+  .composer {
+    padding: 10px 12px calc(14px + env(safe-area-inset-bottom, 0px));
+    gap: 6px;
+  }
+  .icon-btn, .send-btn { width: 46px; height: 46px; font-size: 18px; }
+  .composer textarea {
+    padding: 12px 14px;
+    font-size: 14px;
+    min-height: 46px;
+  }
+
+  .chat-header {
+    padding: 12px 16px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .empty-state .title { font-size: 20px; letter-spacing: 4px; }
+  .empty-state .logo { width: 80px; height: 80px; font-size: 40px; }
+  .auth-card { padding: 40px 24px; }
+  .auth-card h1 { font-size: 24px; letter-spacing: 3px; }
+  .avatar { width: 32px; height: 32px; font-size: 12px; }
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <title>SERVER MONITOR</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/admin.css">
+  <link rel="stylesheet" href="/monitor.css">
+</head>
+<body class="monitor-body">
+
+  <header class="monitor-header">
+    <h1>🖥️ SERVER MONITOR</h1>
+    <div class="header-actions">
+      <a href="/console" class="nav-btn">⌨️ CONSOLE</a>
+      <a href="/admin-panel" class="nav-btn">⚙️ ADMIN</a>
+      <span class="live-indicator"><span class="dot"></span>LIVE</span>
+    </div>
+  </header>
+
+  <div class="monitor-grid">
+
+    <div class="monitor-card">
+      <div class="card-label">🖥️ CPU LOAD</div>
+      <div class="card-value"><span id="cpuLoad">0</span>%</div>
+      <div class="progress-bar"><div class="progress-fill" id="cpuBar"></div></div>
+      <div class="card-detail">
+        <span id="cpuCores">—</span> cores @ <span id="cpuSpeed">—</span> MHz
+      </div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">💾 RAM</div>
+      <div class="card-value"><span id="memPercent">0</span>%</div>
+      <div class="progress-bar"><div class="progress-fill" id="memBar"></div></div>
+      <div class="card-detail">
+        <span id="memUsed">—</span> / <span id="memTotal">—</span>
+      </div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">💿 DISK</div>
+      <div class="card-value"><span id="diskPercent">0</span>%</div>
+      <div class="progress-bar"><div class="progress-fill" id="diskBar"></div></div>
+      <div class="card-detail">
+        <span id="diskUsed">—</span> / <span id="diskTotal">—</span>
+      </div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">🔋 BATTERY</div>
+      <div class="card-value"><span id="batPercent">0</span>%</div>
+      <div class="progress-bar"><div class="progress-fill" id="batBar"></div></div>
+      <div class="card-detail" id="batStatus">—</div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">🌡️ TEMPERATURE</div>
+      <div class="card-value"><span id="temp">—</span>°C</div>
+      <div class="card-detail" id="tempStatus">—</div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">📶 NETWORK</div>
+      <div class="net-row">
+        <span class="net-up">↑ <span id="netTx">0 B/s</span></span>
+        <span class="net-down">↓ <span id="netRx">0 B/s</span></span>
+      </div>
+      <div class="card-detail">Iface: <span id="netIface">—</span></div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">⏱️ UPTIME</div>
+      <div class="card-value" id="uptime" style="font-size:20px">—</div>
+      <div class="card-detail" id="serverTime">—</div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">🔌 CONNECTIONS</div>
+      <div class="card-value"><span id="connections">0</span></div>
+      <div class="card-detail">clients online</div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">📦 NODE.JS</div>
+      <div class="card-value" style="font-size:18px" id="nodeVersion">—</div>
+      <div class="card-detail">
+        RSS: <span id="nodeRss">—</span><br>
+        Heap: <span id="nodeHeap">—</span>
+      </div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">🗄️ DATABASE</div>
+      <div class="card-value" style="font-size:16px">
+        <span id="dbUsers">0</span> users<br>
+        <span id="dbMessages">0</span> messages
+      </div>
+      <div class="card-detail">chat.db</div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">🐧 SYSTEM</div>
+      <div class="card-value" style="font-size:14px" id="osInfo">—</div>
+      <div class="card-detail" id="hostname">—</div>
+    </div>
+
+    <div class="monitor-card">
+      <div class="card-label">🕐 LOCAL TIME</div>
+      <div class="card-value" id="clock" style="font-size:22px">--:--:--</div>
+      <div class="card-detail" id="date">—</div>
+    </div>
+
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-label">📈 CPU & RAM — آخر 60 قراءة</div>
+    <canvas id="liveChart" height="150"></canvas>
+  </div>
+
+  <script src="/monitor.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <title>ADMIN PANEL</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body class="admin-body">
+
+  <header class="admin-header">
+    <h1>💀 ADMIN PANEL</h1>
+    <div class="admin-header-actions">
+      <a href="/monitor" class="admin-nav-btn">📊 MONITOR</a>
+      <a href="/console" class="admin-nav-btn">⌨️ CONSOLE</a>
+      <button class="admin-logout" onclick="adminLogout()">[ LOGOUT ]</button>
+    </div>
+  </header>
+
+  <div class="admin-stats" id="stats">
+    <div class="stat-card"><div class="stat-value">...</div><div class="stat-label">LOADING</div></div>
+  </div>
+
+  <div class="admin-tabs">
+    <button class="tab active" data-tab="users">👥 USERS</button>
+    <button class="tab" data-tab="visits">🌐 VISITS</button>
+    <button class="tab" data-tab="messages">💬 MESSAGES</button>
+    <button class="tab" data-tab="conversations">🗂️ CHANNELS</button>
+    <button class="tab" data-tab="banned">🚫 BANNED</button>
+  </div>
+
+  <div class="admin-content" id="adminContent">
+    <div id="tab-users" class="tab-content active"></div>
+    <div id="tab-visits" class="tab-content"></div>
+    <div id="tab-messages" class="tab-content"></div>
+    <div id="tab-conversations" class="tab-content"></div>
+    <div id="tab-banned" class="tab-content"></div>
+  </div>
+
+  <div class="scroll-hint" id="scrollHint">⇄ اسحب يميناً لرؤية بقية الأعمدة</div>
+
+  <script src="/admin.js"></script>
+</body>
+</html>

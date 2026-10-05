@@ -1,0 +1,386 @@
+/* ============================================
+   ADMIN PANEL — Cyberpunk Theme v3.0
+   ============================================ */
+
+.admin-body {
+  background: #000;
+  color: #e8ffe8;
+  height: 100dvh;
+  padding: 16px;
+  font-family: 'Fira Code', 'Share Tech Mono', monospace;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====== الرأس ====== */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border: 1px solid #00ff41;
+  background: rgba(0, 20, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.admin-header h1 {
+  font-size: 18px;
+  color: #00ff41;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
+  letter-spacing: 3px;
+  font-family: 'Share Tech Mono', monospace;
+  margin: 0;
+}
+
+/* ====== الأزرار في الرأس ====== */
+.admin-header-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.admin-nav-btn {
+  background: transparent;
+  border: 1px solid #00ff41;
+  color: #00ff41;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: 0.2s;
+  white-space: nowrap;
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.5);
+}
+
+.admin-nav-btn:hover {
+  background: rgba(0, 255, 65, 0.15);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
+}
+
+.admin-nav-btn:active {
+  transform: scale(0.97);
+}
+
+.admin-logout {
+  background: transparent;
+  border: 1px solid #ff003c;
+  color: #ff003c;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 2px;
+  transition: 0.2s;
+  font-size: 11px;
+  text-shadow: 0 0 6px rgba(255, 0, 60, 0.5);
+}
+
+.admin-logout:hover {
+  background: rgba(255, 0, 60, 0.15);
+  box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
+}
+
+/* ====== الإحصائيات ====== */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+.stat-card {
+  background: rgba(0, 20, 0, 0.4);
+  border: 1px solid #1a3a1a;
+  padding: 12px 8px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.stat-card:hover {
+  border-color: #00ff41;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #00ff41;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+  word-break: break-all;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #5a8a5a;
+  margin-top: 4px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ====== التبويبات ====== */
+.admin-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.tab {
+  background: transparent;
+  border: 1px solid #1a3a1a;
+  color: #8ac08a;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 1px;
+  transition: 0.2s;
+}
+
+.tab:hover {
+  border-color: #00cc33;
+  color: #00ff41;
+}
+
+.tab.active {
+  background: rgba(0, 255, 65, 0.1);
+  border-color: #00ff41;
+  color: #00ff41;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+}
+
+/* ====== منطقة المحتوى ====== */
+.admin-content {
+  background: rgba(0, 10, 0, 0.5);
+  border: 1px solid #1a3a1a;
+  padding: 12px;
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  min-height: 0;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ====== الجداول ====== */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  min-width: 800px;
+}
+
+.admin-table th {
+  background: rgba(0, 255, 65, 0.1);
+  color: #00ff41;
+  padding: 8px 6px;
+  text-align: right;
+  border-bottom: 1px solid #1a3a1a;
+  letter-spacing: 1px;
+  font-size: 10px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: 'Share Tech Mono', monospace;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.admin-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid #0a1a0a;
+  color: #c8ffc8;
+  word-break: break-all;
+  vertical-align: middle;
+}
+
+.admin-table tr:hover td {
+  background: rgba(0, 255, 65, 0.04);
+}
+
+.admin-table .ip {
+  color: #00ffff;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.4);
+}
+
+.admin-table .time {
+  color: #5a8a5a;
+  font-size: 10px;
+  white-space: nowrap;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.admin-table .username {
+  color: #00ff41;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.4);
+}
+
+.admin-table .password {
+  color: #ffb000;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+}
+
+/* ====== الأزرار ====== */
+.btn {
+  background: transparent;
+  border: 1px solid;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  transition: 0.15s;
+  margin: 1px;
+  color: inherit;
+}
+
+.btn-danger {
+  border-color: #ff003c;
+  color: #ff003c;
+}
+.btn-danger:hover {
+  background: rgba(255, 0, 60, 0.15);
+  box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
+}
+
+.btn-warning {
+  border-color: #ffb000;
+  color: #ffb000;
+}
+.btn-warning:hover {
+  background: rgba(255, 176, 0, 0.15);
+  box-shadow: 0 0 10px rgba(255, 176, 0, 0.4);
+}
+
+.btn-primary {
+  border-color: #00ff41;
+  color: #00ff41;
+}
+.btn-primary:hover {
+  background: rgba(0, 255, 65, 0.15);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+}
+
+/* ====== شارات ====== */
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 9px;
+  border: 1px solid;
+  letter-spacing: 1px;
+  font-family: 'Share Tech Mono', monospace;
+  white-space: nowrap;
+}
+
+.badge-ok { border-color: #00ff41; color: #00ff41; }
+.badge-warn { border-color: #ffb000; color: #ffb000; }
+.badge-danger { border-color: #ff003c; color: #ff003c; }
+
+/* ====== شريط التمرير ====== */
+.admin-content::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.admin-content::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border: 1px solid #1a3a1a;
+}
+
+.admin-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff41, #00cc33);
+  border: 1px solid #000;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+}
+
+.admin-content::-webkit-scrollbar-thumb:hover {
+  background: #00ff41;
+}
+
+.admin-content::-webkit-scrollbar-corner {
+  background: #0a0a0a;
+}
+
+/* ====== تلميح السحب ====== */
+.scroll-hint {
+  display: none;
+  text-align: center;
+  padding: 6px;
+  color: #00ff41;
+  font-size: 10px;
+  letter-spacing: 2px;
+  background: rgba(0, 255, 65, 0.08);
+  border: 1px dashed #1a3a1a;
+  margin-top: 8px;
+  animation: hintPulse 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+
+/* ====== للجوال ====== */
+@media (max-width: 700px) {
+  .admin-body { padding: 8px; }
+  .admin-header { padding: 10px 12px; gap: 6px; }
+  .admin-header h1 { font-size: 13px; letter-spacing: 1px; }
+  
+  .admin-header-actions { gap: 4px; }
+  .admin-nav-btn { padding: 6px 8px; font-size: 10px; letter-spacing: 0; }
+  .admin-logout { padding: 6px 10px; font-size: 10px; }
+  
+  .admin-stats { 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 6px; 
+    margin-bottom: 10px;
+  }
+  .stat-card { padding: 8px 4px; }
+  .stat-value { font-size: 16px; }
+  .stat-label { font-size: 8px; letter-spacing: 1px; }
+  
+  .tab { 
+    padding: 6px 8px; 
+    font-size: 9px; 
+    letter-spacing: 0;
+    flex: 1 0 auto;
+  }
+  
+  .admin-table { 
+    font-size: 10px; 
+    min-width: 800px;
+  }
+  .admin-table th { 
+    padding: 6px 4px; 
+    font-size: 9px;
+  }
+  .admin-table td { 
+    padding: 6px 4px; 
+  }
+  
+  .btn { padding: 3px 6px; font-size: 10px; }
+  .admin-content { padding: 8px; }
+  
+  .scroll-hint { display: block; }
+}

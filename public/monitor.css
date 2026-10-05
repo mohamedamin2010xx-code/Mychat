@@ -1,0 +1,443 @@
+/* ============================================
+   MONITOR & CONSOLE — Cyberpunk Theme v2.0
+   مع حل مشكلة التمرير
+   ============================================ */
+
+/* ====== إصلاح التمرير العام ====== */
+html, body {
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  position: static !important;
+}
+
+/* ====== الحاويات العامة ====== */
+.monitor-body {
+  background: #000;
+  color: #e8ffe8;
+  min-height: 100dvh;
+  padding: 16px;
+  padding-bottom: 60px;
+  font-family: 'Fira Code', 'Share Tech Mono', monospace;
+  display: block !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+.console-body {
+  background: #000;
+  color: #e8ffe8;
+  height: 100dvh;
+  padding: 16px;
+  font-family: 'Fira Code', 'Share Tech Mono', monospace;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====== الرأس ====== */
+.monitor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border: 1px solid #00ff41;
+  background: rgba(0, 20, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.monitor-header h1 {
+  font-size: 18px;
+  color: #00ff41;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.6);
+  letter-spacing: 3px;
+  margin: 0;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  background: transparent;
+  border: 1px solid #00ff41;
+  color: #00ff41;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.nav-btn:hover {
+  background: rgba(0, 255, 65, 0.15);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #00ff41;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.live-indicator .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ff41;
+  box-shadow: 0 0 10px #00ff41;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ====== شبكة البطاقات ====== */
+.monitor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.monitor-card {
+  background: rgba(0, 20, 0, 0.4);
+  border: 1px solid #1a3a1a;
+  padding: 14px;
+  transition: 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.monitor-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40px; height: 2px;
+  background: #00ff41;
+  box-shadow: 0 0 8px #00ff41;
+}
+
+.monitor-card:hover {
+  border-color: #00ff41;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+}
+
+.card-label {
+  font-size: 10px;
+  color: #5a8a5a;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.card-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: #00ff41;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+  line-height: 1.1;
+  margin-bottom: 8px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.card-detail {
+  font-size: 10px;
+  color: #5a8a5a;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+/* ====== شريط التقدم ====== */
+.progress-bar {
+  height: 6px;
+  background: #0a1a0a;
+  border: 1px solid #1a3a1a;
+  margin-bottom: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: #00ff41;
+  transition: width 0.5s ease, background 0.3s;
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* ====== الشبكة ====== */
+.net-row {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.net-up { color: #ffb000; }
+.net-down { color: #00ffff; }
+
+/* ====== الرسم البياني ====== */
+.chart-section {
+  background: rgba(0, 20, 0, 0.4);
+  border: 1px solid #1a3a1a;
+  padding: 14px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.chart-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 60px; height: 2px;
+  background: #00ffff;
+  box-shadow: 0 0 8px #00ffff;
+}
+
+.chart-label {
+  font-size: 11px;
+  color: #5a8a5a;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+#liveChart {
+  width: 100%;
+  height: 150px;
+  display: block;
+}
+
+/* ============================================
+   CONSOLE (الطرفية)
+   ============================================ */
+.console-wrap {
+  background: #000;
+  border: 1px solid #00ff41;
+  box-shadow: 0 0 25px rgba(0, 255, 65, 0.3);
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.console-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  font-family: 'Share Tech Mono', 'Fira Code', monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #c8ffc8;
+  background: #000;
+  scrollbar-width: thin;
+  scrollbar-color: #00ff41 #000;
+}
+
+.console-output::-webkit-scrollbar {
+  width: 8px;
+}
+.console-output::-webkit-scrollbar-track {
+  background: #000;
+}
+.console-output::-webkit-scrollbar-thumb {
+  background: #00ff41;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+}
+
+.console-line {
+  margin-bottom: 4px;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+.console-cmd {
+  color: #00ff41;
+  font-weight: bold;
+}
+.console-cmd::before {
+  content: '❯ ';
+  color: #00cc33;
+}
+
+.console-info {
+  color: #5a8a5a;
+  font-style: italic;
+}
+
+.console-err {
+  color: #ff003c;
+  text-shadow: 0 0 6px rgba(255, 0, 60, 0.4);
+}
+
+.console-out {
+  color: #e8ffe8;
+}
+
+.console-warn {
+  color: #ffb000;
+}
+
+.console-success {
+  color: #39ff14;
+  text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
+}
+
+/* ====== صندوق الإدخال ====== */
+.console-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #050505;
+  border-top: 1px solid #1a3a1a;
+  flex-shrink: 0;
+}
+
+.console-prompt {
+  color: #00ff41;
+  font-weight: bold;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 14px;
+  white-space: nowrap;
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.5);
+}
+
+.console-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #00ff41;
+  font-family: 'Share Tech Mono', 'Fira Code', monospace;
+  font-size: 13px;
+  outline: none;
+  padding: 6px 0;
+  caret-color: #00ff41;
+  min-width: 0;
+}
+
+.console-input::placeholder {
+  color: #2a4a2a;
+}
+
+/* ====== الأوامر السريعة ====== */
+.quick-cmds {
+  display: flex;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #050505;
+  border-top: 1px solid #1a3a1a;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.quick-cmd {
+  background: transparent;
+  border: 1px solid #1a3a1a;
+  color: #5a8a5a;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 10px;
+  transition: 0.15s;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.quick-cmd:hover {
+  border-color: #00ff41;
+  color: #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+  background: rgba(0, 255, 65, 0.05);
+}
+
+/* ====== للجوال ====== */
+@media (max-width: 700px) {
+  .monitor-body {
+    padding: 8px;
+    padding-bottom: 80px;
+  }
+
+  .console-body {
+    padding: 8px;
+  }
+
+  .monitor-header {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .monitor-header h1 {
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .nav-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+
+  .monitor-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .monitor-card {
+    padding: 10px;
+  }
+
+  .card-value {
+    font-size: 20px;
+  }
+
+  .card-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .card-detail {
+    font-size: 9px;
+  }
+
+  .console-output {
+    font-size: 11px;
+    padding: 10px;
+  }
+
+  .console-prompt {
+    font-size: 12px;
+  }
+
+  .console-input {
+    font-size: 12px;
+  }
+
+  .quick-cmds {
+    padding: 6px 10px;
+    gap: 4px;
+  }
+
+  .quick-cmd {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+}
