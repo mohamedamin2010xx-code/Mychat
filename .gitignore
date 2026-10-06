@@ -1,5 +1,7 @@
 .env
 chat.db
+chat.db-shm
+chat.db-wal
 cookies.txt
 uploads/
 node_modules/
